@@ -5,13 +5,12 @@ const path = require('path');
 const hbs = require('hbs');
 
 //OWN MODULES
+const server = require('./config/serverConfig');
 
 //DIRECTORIES
 const publicDirectory = path.join(__dirname, '../public');
 const viewsDirectory = path.join(__dirname, '../views');
 const partialsDirectory = path.join(__dirname, '../views/partials');
-
-const listenPort = 3000;
 
 hbs.registerPartials(partialsDirectory);
 app.use(express.json());
@@ -34,4 +33,4 @@ app.get('*', (req,res) => {
     });
 });
 
-app.listen(listenPort, () => console.log('De applicatie luistert op poort: ' + listenPort));
+app.listen(server.config.PORT, () => console.log('De applicatie luistert op poort: ' + server.config.PORT));
