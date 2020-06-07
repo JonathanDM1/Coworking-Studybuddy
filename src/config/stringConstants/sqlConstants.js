@@ -1,5 +1,5 @@
-const QUERIES = {
+const SQL = {
     SELECT_ALL: 'SELECT * FROM plan-it'
 }
 
-module.exports.QUERIES = QUERIES;
+module.exports.SQL = SQL;
