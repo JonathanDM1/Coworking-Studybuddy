@@ -26,6 +26,33 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/loginregister', (req, res) => {
+    res.render('user/loginregister');
+});
+
+app.post('/login', (req,res) => {
+    //Probeer de user in te loggen. if(user == true) -> succes else -> error
+    if(req.body != 0){
+        res.send({status: "OK"});
+        console.log(req.body);
+    } else {
+        res.send({status: "NOK"});
+    }
+});
+
+app.post('/register', (req, res) => {
+    if(req.body != 0){
+        res.send({status: "OK"});
+        console.log(req.body);
+    } else {
+        res.send({status: "NOK"});
+    }
+});
+
+app.get('/settings', (req, res) => {
+    res.render('user/settings');
+});
+
 //ALLE ROUTES HIERBOVEN PLAATSEN
 app.get('*', (req,res) => {
     res.render('404', {
