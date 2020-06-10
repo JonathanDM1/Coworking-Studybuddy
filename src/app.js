@@ -6,6 +6,7 @@ const hbs = require('hbs');
 
 //OWN MODULES
 const server = require('./config/serverConfig');
+const users = require('./modules/users/loginregister');
 
 //DIRECTORIES
 const publicDirectory = path.join(__dirname, '../public');
@@ -41,11 +42,10 @@ app.post('/login', (req,res) => {
 });
 
 app.post('/register', (req, res) => {
-    if(req.body != 0){
-        res.send({status: "OK"});
-        console.log(req.body);
+    if(users.checkIfUserCreates(req.body)){
+        res.send({status: "OK", message: "Gebruiker is succesvol aangemaakt"});
     } else {
-        res.send({status: "NOK"});
+        res.send({status: "NOK", message: "Gebruiker kon niet worden aangemaakt"});
     }
 });
 

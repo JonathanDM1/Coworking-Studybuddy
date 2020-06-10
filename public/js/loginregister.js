@@ -44,7 +44,8 @@ function getRegisterData(){
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
         password1: document.getElementById("password1").value,
-        password2: document.getElementById("password2").value
+        password2: document.getElementById("password2").value,
+        school: document.getElementById("school_name").value
     };
     return data;
 }
@@ -64,7 +65,7 @@ function checkEmail(email){
         return false;
     }
 }
-         
+//Proberen in apparte file te steken met een collectie aan fetch functies. Zo zijn ze makkelijk herbruikbaar         
 function sendFormToAPI(route, data){
     fetch('http://localhost:3000' + route, {
         method: 'POST',

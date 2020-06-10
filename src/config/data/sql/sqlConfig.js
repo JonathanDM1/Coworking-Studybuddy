@@ -2,7 +2,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'plan-it'
+    database: 'planit'
 }
 
 module.exports.config = config;
