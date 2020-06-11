@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 //OWN MODULES
 const server = require('./config/serverConfig');
 const users = require('./modules/users/loginregister');
+const projects = require('./modules/projects/projectActions');
 
 
 //DIRECTORIES
@@ -36,10 +37,6 @@ app.get('/loginregister', (req, res) => {
     res.render('user/loginregister');
 });
 
-app.get('/projects', (req,res) => {
-    res.render('project/projects');
-});
-
 app.post('/login', (req,res) => {
     try{
         users.tryLogIn(req.body);
@@ -61,9 +58,26 @@ app.post('/register', (req, res) => {
     }
 });
 
-app.get('/settings', (req, res) => {
-    res.render('user/settings');
+app.get('/projects/:id', (req,res) => {
+    //GET PROJECT WITH ID AND RENDER
 });
+
+app.get('/newproject', (req, res) => {
+    res.render('project/addProject');
+});
+
+app.post('/newproject', (req,res) => {
+    console.log(req.body);
+    try{
+        projects.tryCreateProject(req.body);
+        res.json({status: "OK"});
+        console.log("Er is een nieuw project aangemaakt");
+    } catch {
+        console.log("Kan niet maken");
+        res.json({status: "NOK"});
+    }
+})
+
 
 //ALLE ROUTES HIERBOVEN PLAATSEN
 app.get('*', (req,res) => {
@@ -71,7 +85,6 @@ app.get('*', (req,res) => {
         page: req.url
     });
 });
-
 
 
 app.listen(server.config.PORT, () => console.log('De applicatie luistert op poort: ' + server.config.PORT));

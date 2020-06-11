@@ -26,6 +26,11 @@ function checkEmail(data){
     return executeQuery(QUERY.SQL.CHECK_EMAIL, [data]);
 }
 
+function createProject(data){
+    return executeQuery(QUERY.SQL.CREATE_PROJECT, parseData.parseSql(data));
+}
+
 module.exports.createUser = createUser;
 module.exports.checkUsername = checkUsername;
 module.exports.checkEmail = checkEmail;
+module.exports.createProject = createProject;

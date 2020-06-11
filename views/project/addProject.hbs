@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>PLAN-IT</title>
+  <meta name="description" content="PLAN-IT">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  {{> header }}
+    <section class="content">
+        <h2>Maak een nieuw project aan</h2>
+        <form method="POST" id="createNewProject">
+            <input type="text" id="project_name" placeholder="projectnaam" >
+            <input type="text" id="owner" placeholder="username eigenaar">
+            <textarea id="description" placeholder="beschrijving"></textarea>
+            <input type="text" id="collab" placeholder="email1;email2;email3">
+            <input type="submit" id="create" value="Maak project aan">
+        </form>
+    </section>
+  {{> footer }}
+  <script src="js/project.js"></script>
+</body>
+</html>
