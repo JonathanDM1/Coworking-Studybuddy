@@ -82,12 +82,28 @@ function sendFormToAPI(route, data){
 }
 
 function checkResponse(response){
+    
     if(response.status == "OK"){
+        //show success message
         console.log("JEEEJ");
+        saveTokenToLS(response.accessToken);
     } else {
         //HANDLE ERROR HERE
         console.log("ERROR");
     }
+}
+
+//DIT IS NIET SECURE!!!!!
+function saveTokenToLS(token){
+    localStorage.setItem("token", token);
+}
+
+function getToken(){
+    return localStorage.getItem("token");
+}
+
+function clearLocalStorage(){
+    localStorage.clear();
 }
 
 

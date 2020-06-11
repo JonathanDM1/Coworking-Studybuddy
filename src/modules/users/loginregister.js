@@ -1,16 +1,6 @@
 const bcrypt = require('bcrypt');
 const sqlHandler = require('../data/sqlHandler');
 const parseData = require('../data/parseData');
-/*
-function tryRegister(data){
-    changePassword(data).then(function(result){
-        console.log(result);
-        return createUser(result);
-    }).then(function(result){
-        console.log("Gebruiker is aangemaakt");
-        return true;
-    });   
-}*/
 
 function tryRegister(data){
     checkUsernameExists(data).then(function(result){
@@ -76,7 +66,6 @@ function createUser(data){
 function tryLogIn(data){
     checkUsername(data).then(function(result){
         console.log("Gebruiker gevonden");
-        console.log(result);
         return checkPassword(result);
     }).then(function(result){
         console.log("komt overeen");
