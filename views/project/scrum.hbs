@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>PLAN-IT</title>
+  <meta name="description" content="PLAN-IT">
+  <link rel="stylesheet"  href="css/style.css">
+</head>
+<body>
+  {{> header }}
+    <div class="content">
+      <section>
+      <h2>Maak een nieuwe taak</h2>
+        <form id="addTask" method="POST">
+            <input type="text"  id="task_title" placeholder="titel">
+            <textarea id="task_description" placeholder="beschrijving"></textarea>
+            <select id="task_status">
+                <option>Selecteer een optie</option>
+                <option value="todo">To Do</option>
+                <option value="doing">Doing</option>
+                <option value="review">Review</option>
+                <option value="done">Done</option>
+            </select>
+            <textarea id="comment" placeholder="opmerkingen"></textarea>
+            <input type="text" id="assigned_user" placeholder="toewijzen aan gebruiker">
+            <input type="submit" id="submit_task" value="Voeg taak toe">
+        </form>
+      </section>
+      <section id="scrum">
+        <!-- Al de taken worden door JS ingeladen -->
+        <div class="scrum-container">
+          <h3>TO DO</h3>
+          <div id="todo">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>DOING</h3>
+          <div id="doing">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>REVIEW</h3>
+          <div id="review">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>DONE</h3>
+          <div id="done">
+
+          </div>
+        </div>
+      </section>
+      <section id="editForm">
+        <form id="editTask" method="POST">
+        <input type="text" id="edit_title" placeholder="title">
+        <textarea id="edit_description" placeholder="beschrijving"></textarea>
+        <select id="edit_status">
+                <option>Selecteer een optie</option>
+                <option value="todo">To Do</option>
+                <option value="doing">Doing</option>
+                <option value="review">Review</option>
+                <option value="done">Done</option>
+        </select>
+        <textarea id="edit_comments" placeholder="Opmerkingen"></textarea>
+        <input type="text" id="edit_assigned_user" placeholder="toewijzen aan gebruiker">
+        <input type="submit" id="edit_submit" value="Sla Op">
+        </form>
+      </section>
+    </div>
+  {{> footer }}
+  <script type="text/javascript" src="js/scrum.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ;(function() { 
     'use strict';
 	window.addEventListener('load', function() {
-		checkAuth();
+        checkAuth();
 	})
 })();	
 //DEZE FILE TOEVOEGEN AAN ALLE PAGINA'S DIE EEN AUTH NODIG HEBBEN
