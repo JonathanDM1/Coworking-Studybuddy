@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const sqlHandler = require('../data/sqlHandler');
 const parseData = require('../data/parseData');
-
+/*
 function tryRegister(data){
     changePassword(data).then(function(result){
         console.log(result);
@@ -9,8 +9,50 @@ function tryRegister(data){
     }).then(function(result){
         console.log("Gebruiker is aangemaakt");
         return true;
+    });   
+}*/
+
+function tryRegister(data){
+    checkUsernameExists(data).then(function(result){
+        return checkEmailExists(data);
+    }).then(function(result){
+        return changePassword(data);
+    }).then(function(result){
+        return createUser(result);
+    }).then(function(result){
+        console.log("De gebruiker is aangemaakt");
+        return true;
+    }).catch(function(error){
+        console.log(error);
     });
-    
+}
+
+function checkUsernameExists(data){
+    return new Promise(function(resolve, reject){
+        sqlHandler.checkUsername(data.username).then((result) => {
+            if(result.length == 0){
+                resolve(data);
+            } else {
+                reject('Username bestaat al');
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    })
+}
+
+function checkEmailExists(data){
+    return new Promise(function(resolve, reject){
+        sqlHandler.checkEmail(data.email).then((result) => {
+            if(result.length == 0){
+                resolve(data);
+            } else {
+                reject('Email bestaat al');
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    })
 }
 
 function changePassword(data){
