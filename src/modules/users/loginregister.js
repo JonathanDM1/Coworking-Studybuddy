@@ -2,54 +2,78 @@ const bcrypt = require('bcrypt');
 const sqlHandler = require('../data/sqlHandler');
 const parseData = require('../data/parseData');
 
-async function checkIfUserCreates(data){
-        let amountEmail = checkEmailAdress(data.email);
-        let amountUsername = checkUsername(data.username);
+function tryRegister(data){
+    changePassword(data).then(function(result){
+        console.log(result);
+        return createUser(result);
+    }).then(function(result){
+        console.log("Gebruiker is aangemaakt");
+        return true;
+    });
+    
+}
+
+function changePassword(data){
+    return new Promise(async function(resolve, reject){
         data = parseData.parseUserData(data);
         data.password = await hashPassword(data.password);
-        createUser(data);
+        resolve(data);
+    });
 }
-
 
 function createUser(data){
-    sqlHandler.createUser(data).then((results) => {
-        console.log(results);
+    return new Promise(function(resolve, reject){
+        sqlHandler.createUser(data).then((result) => {
+            resolve("Gebruiker is aangemaakt");
+        }).catch((error) => {
+            reject("Gebruiker kon niet worden aangemaakt");
+        });
+    });
+}
+
+function tryLogIn(data){
+    checkUsername(data).then(function(result){
+        console.log("Gebruiker gevonden");
+        console.log(result);
+        return checkPassword(result);
+    }).then(function(result){
+        console.log("komt overeen");
         return true;
-    }).catch((error) => {
-        console.log(error);
+    }).catch(function(error){
+        console.log("error");
         return false;
-    });
+    })
 }
 
-function checkEmailAdress(email){
-    sqlHandler.checkEmail(email).then((results) => {
-        return results.length;
-    }).catch((error) => {
-        console.log(error);
-    });
+function checkUsername(data){
+    return new Promise(function(resolve, reject){
+        sqlHandler.checkUsername(data.username).then((result) => {
+            let item = {
+                data: data,
+                result: result
+            };
+            resolve(item);
+        }).catch((error) => {
+            reject("Gebruiker niet gevonden");
+        })
+    })
 }
 
-function checkUsername(username){
-    sqlHandler.checkUsername(username).then((results) => {
-        return results.length;
-    }).catch((error) => {
-        console.log(error);
-    });
-}
-
-function checkResult(res){
-    console.log(res.length);
-    if(res.length == 0){
-        return true;
-    } else {
-        return false
-    }
-}
-
-async function hashPassword(password){
-    const salt = await bcrypt.genSalt();
-    return await bcrypt.hash(password, salt);
+function checkPassword(params){
+    return new Promise(async function(resolve, reject){
+        if(await bcrypt.compare(params.data.password, params.result[0].password)){
+            resolve("Passwoorden komen overeen");
+        } else {
+            reject("Paswoorden komen niet overeen");
+        }
+    })
 }
 
 
-module.exports.checkIfUserCreates = checkIfUserCreates;
+
+function hashPassword(password){
+    return bcrypt.hash(password, 10);
+}
+
+module.exports.tryRegister = tryRegister;
+module.exports.tryLogIn = tryLogIn;

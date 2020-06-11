@@ -7,7 +7,7 @@ function parseUserData(data){
     }
     return user;
 }
-
+//BRON: Stackoverflow.
 function parseSql(data){
     let dataArr = [];
     for(let prop in data){

@@ -1,5 +1,6 @@
 //DOWNLOADED MODULES
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
@@ -18,6 +19,12 @@ app.use(express.json());
 app.use(express.static(publicDirectory));
 app.set('view engine', 'hbs');
 app.set('views', viewsDirectory);
+
+app.use(session({
+    secret: 'Dit is een sleutel',
+    resave: false,
+    saveUninitialized: false
+}));
 ///---------------- ROUTES --------------///
 app.get('', (req,res) =>{
     res.render('index');
@@ -32,20 +39,22 @@ app.get('/loginregister', (req, res) => {
 });
 
 app.post('/login', (req,res) => {
-    //Probeer de user in te loggen. if(user == true) -> succes else -> error
-    if(req.body != 0){
-        res.send({status: "OK"});
-        console.log(req.body);
-    } else {
-        res.send({status: "NOK"});
+    try{
+        users.tryLogIn(req.body);
+        res.json({status: "OK"});
+        req.session.username = req.body.username;
+    } catch{
+        res.json({status: "NOK"});
     }
+    
 });
 
 app.post('/register', (req, res) => {
-    if(users.checkIfUserCreates(req.body)){
-        res.send({status: "OK", message: "Gebruiker is succesvol aangemaakt"});
-    } else {
-        res.send({status: "NOK", message: "Gebruiker kon niet worden aangemaakt"});
+    try{
+        users.tryRegister(req.body);
+        res.json({status: "OK"});
+    }catch{
+        res.json({status: "NOK"});
     }
 });
 
