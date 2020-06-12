@@ -21,6 +21,14 @@
       <div id="addProject">
         <a href="http://localhost:3000/newproject">+ Maak een nieuw project</a>
       </div>
+      <div id="editProject">
+        <form id="edit_project" method="POST">
+          <input type="text" id="edit_title" placeholder="titel">
+          <textarea id="edit_description" placeholder="beschrijving"></textarea>
+          <input type="text" id="edit_collab" placeholder="collabs">
+          <input type="submit" id="submit_edit">
+        </form>
+      </div>
     </section>
   {{> footer }}
   <script src="js/detail.js"></script>

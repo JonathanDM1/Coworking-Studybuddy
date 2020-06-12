@@ -119,6 +119,7 @@ function deleteTask(id){
 }
 
 function deleteFromAPI(route){
+    console.log(route);
     fetch('http://localhost:3000' + route, {
         method: 'DELETE',
     })

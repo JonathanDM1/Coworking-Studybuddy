@@ -62,6 +62,11 @@ function deleteProject(data){
     return executeQuery(QUERY.SQL.DELETE_PROJECT, [data]);
 }
 
+function updateProject(data){
+    console.log(data);
+    return executeQuery(QUERY.SQL.UPDATE_PROJECT, parseData.parseSql(data));
+}
+
 module.exports.createUser = createUser;
 module.exports.checkUsername = checkUsername;
 module.exports.checkEmail = checkEmail;
@@ -74,3 +79,4 @@ module.exports.updateTask = updateTask;
 module.exports.deleteTask = deleteTask;
 module.exports.getAllProjectsUser = getAllProjectsUser;
 module.exports.deleteProject = deleteProject;
+module.exports.updateProject = updateProject;

@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const server = require('./config/serverConfig');
 const users = require('./modules/users/loginregister');
 const projects = require('./modules/projects/projectActions');
+const tasks = require('./modules/projects/taskActions');
 const sqlHandler = require('./modules/data/sqlHandler');
 
 
@@ -71,20 +72,23 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/projects/:id', (req,res) => {
-    //GET PROJECT WITH ID AND RENDER
         sqlHandler.getProjectId(req.params.id).then((result) => {
-            res.render('project/projectDetail', {
-                id: result[0].id,
-                project_name: result[0].project_name,
-                owner: result[0].owner,
-                description: result[0].description,
-                collab: result[0].collab
-            });
+            console.log(result[0]);
+            res.send({result: result});
         }).catch((error) => {
             console.log(error);
             console.log("Kon geen informatie ophalen over project");
         })
 });
+
+app.put('/projects/:id', (req, res) => {
+    try{   
+        projects.tryUpdateProject(req.body);
+        res.send({status: "OK"});
+    } catch{
+        console.log("Het project kon niet worden bijgewerkt");
+    }
+})
 
 app.get('/newtask', (req,res) => {
     res.render('project/scrum');
@@ -93,7 +97,8 @@ app.get('/newtask', (req,res) => {
 app.post('/newTask', async (req, res) => {
     let test = 1;
     try{
-        projects.tryCreateTask(req.body);
+        tasks.tryCreateTask(req.body);
+        res.redirect('/projects/' + req.body.project_id + '/scrum')
     } catch{
         console.log("Taak kan niet gemaakt worden");
     }
@@ -111,7 +116,7 @@ app.get('/task/:id', (req, res) => {
 
 app.put('/task/:id', (req, res) => {
     try{
-        projects.tryUpdateTask(req.body);
+        tasks.tryUpdateTask(req.body);
     } catch {
         console.log("De taak kan niet bijgewerkt worden");
     }
@@ -119,7 +124,7 @@ app.put('/task/:id', (req, res) => {
 
 app.delete('/task/:id', (req, res) => {
     try{
-        projects.tryDeleteTask(req.params.id);
+        tasks.tryDeleteTask(req.params.id);
     } catch {
         console.log("De taak kan niet verwijderd worden.");
     }
@@ -127,7 +132,6 @@ app.delete('/task/:id', (req, res) => {
 
 app.get('/projects/:id/scrum', (req, res) => {
     sqlHandler.getAllTasks(req.params.id).then((result) => {
-        res.json(result);
     }).catch((error) => {
         console.log(error);
     });

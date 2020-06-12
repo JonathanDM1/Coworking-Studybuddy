@@ -1,6 +1,5 @@
 const sqlHandler = require('../data/sqlHandler');
 
-
 function tryCreateProject(data){
     createProject(data).then(function(result){
         return true;
@@ -42,59 +41,21 @@ function getProjectInfo(id){
     })
 }
 
-function tryCreateTask(data){
-    createTask(data).then(function(result){
-        return true;
-    }).catch(function(error){
-        console.log(error);
-        return false;
-    })
-}
-
-function createTask(data){
-    return new Promise(function(resolve, reject){
-        sqlHandler.createTask(data).then((result) => {
-            resolve("Taak is aangemaakt");
-        }).catch((error) => {
-            reject("Taak kon niet worden aangemaakt");
-        });
-    });
-}
-
-function tryUpdateTask(data){
-    updateTask(data).then(function(result){
-        return true;
-    }).catch(function(error){
-        return false;
-    });
-}
-
-function updateTask(data){
-    return new Promise(function(resolve, reject){
-        sqlHandler.updateTask(data).then((result) => {
-            resolve("De taak is aangepast");
-        }).catch((error) => {
-            console.log(error);
-            reject("De taak kon niet worden aangepast.");
-        })
-    });
-}
-
-function tryDeleteTask(id){
-    deleteTask(id).then(function(result){
+function tryUpdateProject(data){
+    updateProject(data).then(function(result){
         return true;
     }).catch(function(error){
         return false;
     })
 }
 
-function deleteTask(id){
+function updateProject(data){
     return new Promise(function(resolve, reject){
-        sqlHandler.deleteTask(id).then((result) => {
-            resolve("de taak is verwijderd");
+        sqlHandler.updateProject(data).then((result) => {
+            resolve("Het project is bijgewerkt");
         }).catch((error) => {
             console.log(error);
-            reject("De taak kon niet verwijderd worden");
+            reject("Het project kon niet worden bijgewerkt");
         })
     })
 }
@@ -121,7 +82,5 @@ function deleteProject(id){
 
 module.exports.tryCreateProject = tryCreateProject;
 module.exports.getInfoForProject = getInfoForProject;
-module.exports.tryCreateTask = tryCreateTask;
-module.exports.tryUpdateTask = tryUpdateTask;
-module.exports.tryDeleteTask = tryDeleteTask;
+module.exports.tryUpdateProject = tryUpdateProject;
 module.exports.tryDeleteProject = tryDeleteProject;
