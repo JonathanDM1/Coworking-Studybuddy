@@ -26,7 +26,7 @@ app.use(express.static(publicDirectory));
 app.set('view engine', 'hbs');
 app.set('views', viewsDirectory);
 
-///---------------- ROUTES --------------///
+/////////////=================== BASIC-ROUTES ============================
 app.get('', (req,res) =>{
     res.render('index');
 });
@@ -35,6 +35,14 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/about', (req, res) => {
+    res.render('about_us');
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact');
+})
+/////////////=================== LOGIN/REGISTER ============================
 app.get('/loginregister', (req, res) => {
     res.render('user/loginregister');
 });
@@ -59,7 +67,7 @@ app.post('/register', (req, res) => {
         res.json({status: "NOK"});
     }
 });
-
+/////////////=================== PROJECTS ============================
 app.get('/projects', (req, res) => {
     sqlHandler.getAllProjectsUser("JonathanDM").then((result) => {
         console.log(result);
@@ -73,7 +81,6 @@ app.get('/projects', (req, res) => {
 
 app.get('/projects/:id', (req,res) => {
         sqlHandler.getProjectId(req.params.id).then((result) => {
-            console.log(result[0]);
             res.send({result: result});
         }).catch((error) => {
             console.log(error);
@@ -84,12 +91,44 @@ app.get('/projects/:id', (req,res) => {
 app.put('/projects/:id', (req, res) => {
     try{   
         projects.tryUpdateProject(req.body);
-        res.send({status: "OK"});
+        res.redirect('/projects');
     } catch{
         console.log("Het project kon niet worden bijgewerkt");
     }
-})
+});
 
+app.get('/projects/:id/scrum', (req, res) => {
+    sqlHandler.getAllTasks(req.params.id).then((result) => {
+    }).catch((error) => {
+        console.log(error);
+    });
+});
+
+app.delete('/projects/:id', (req, res) => {
+    try{
+        projects.tryDeleteProject(req.params.id);
+        res.redirect('/projects');
+    } catch {
+        console.log("De taak kan niet worden verwijderd");
+    }
+});
+
+app.get('/newproject', (req, res) => {
+    res.render('project/addProject');
+});
+
+app.post('/newproject', (req,res) => {
+    console.log(req.body);
+    try{
+        projects.tryCreateProject(req.body);
+        res.redirect('/projects');
+        console.log("Er is een nieuw project aangemaakt");
+    } catch {
+        console.log("Kan niet maken");
+        res.json({status: "NOK"});
+    }
+});
+/////////////=================== TASKS ============================
 app.get('/newtask', (req,res) => {
     res.render('project/scrum');
 });
@@ -102,7 +141,6 @@ app.post('/newTask', async (req, res) => {
     } catch{
         console.log("Taak kan niet gemaakt worden");
     }
-    res.redirect('/projects/' + test + '/scrum');
 });
 
 app.get('/task/:id', (req, res) => {
@@ -130,49 +168,12 @@ app.delete('/task/:id', (req, res) => {
     }
 })
 
-app.get('/projects/:id/scrum', (req, res) => {
-    sqlHandler.getAllTasks(req.params.id).then((result) => {
-    }).catch((error) => {
-        console.log(error);
-    });
-});
-
-app.get('/projects/:id/settings', (req,res) => {
-    console.log("Hier komen de settings voor het project");
-});
-
-app.delete('/projects/:id', (req, res) => {
-    try{
-        projects.tryDeleteProject(req.params.id);
-        res.json({status: "OK"});
-    } catch {
-        console.log("De taak kan niet worden verwijderd");
-    }
-});
-
-app.get('/newproject', (req, res) => {
-    res.render('project/addProject');
-});
-
-app.post('/newproject', (req,res) => {
-    console.log(req.body);
-    try{
-        projects.tryCreateProject(req.body);
-        res.json({status: "OK"});
-        console.log("Er is een nieuw project aangemaakt");
-    } catch {
-        console.log("Kan niet maken");
-        res.json({status: "NOK"});
-    }
-});
-
-
-//ALLE ROUTES HIERBOVEN PLAATSEN
+/////////////=================== NOT FOUND ============================
 app.get('*', (req,res) => {
     res.render('404', {
         page: req.url
     });
 });
 
-
+/////////////=================== SERVER STARTS ============================
 app.listen(server.config.PORT, () => console.log('De applicatie luistert op poort: ' + server.config.PORT));
