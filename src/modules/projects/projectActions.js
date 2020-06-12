@@ -99,8 +99,29 @@ function deleteTask(id){
     })
 }
 
+function tryDeleteProject(id){
+    deleteProject(id).then(function(result){
+        return true;
+    }).catch(function(error){
+        return false;
+    })
+}
+
+
+function deleteProject(id){
+    return new Promise(function(resolve, reject){
+        sqlHandler.deleteProject(id).then((result) => {
+            resolve("Het project is verwijderd");
+        }).catch((error) => {
+            console.log(error);
+            reject("Het project kan niet worden verwijderd");
+        })
+    })
+}
+
 module.exports.tryCreateProject = tryCreateProject;
 module.exports.getInfoForProject = getInfoForProject;
 module.exports.tryCreateTask = tryCreateTask;
 module.exports.tryUpdateTask = tryUpdateTask;
 module.exports.tryDeleteTask = tryDeleteTask;
+module.exports.tryDeleteProject = tryDeleteProject;

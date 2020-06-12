@@ -138,8 +138,12 @@ app.get('/projects/:id/settings', (req,res) => {
 });
 
 app.delete('/projects/:id', (req, res) => {
-    //mail sturen met het verwijderwachtwoord of captcha
-    console.log("Hier worden mogelijks de projecten verwijderd.");
+    try{
+        projects.tryDeleteProject(req.params.id);
+        res.json({status: "OK"});
+    } catch {
+        console.log("De taak kan niet worden verwijderd");
+    }
 });
 
 app.get('/newproject', (req, res) => {

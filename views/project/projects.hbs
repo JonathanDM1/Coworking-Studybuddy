@@ -13,12 +13,16 @@
       <div class="project">
         <h2>{{project_name}}</h2>
         <p>{{description}}</p>
+        <button onclick="edit({{id}})">Bewerk</button>
+        <button onclick="deleteProject({{id}})">Verwijder</button>
         <button onclick="showdetails({{id}})">Details</button>
       </div>
       {{/each}}
+      <div id="addProject">
+        <a href="http://localhost:3000/newproject">+ Maak een nieuw project</a>
+      </div>
     </section>
   {{> footer }}
-  <!--<script src="js/auth.js"></script>-->
   <script src="js/detail.js"></script>
 </body>
 </html>
