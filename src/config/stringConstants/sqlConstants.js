@@ -10,7 +10,8 @@ const SQL = {
     GET_ALL_TASKS_PROJECT: 'SELECT * FROM scrum_tasks WHERE project_id = ?',
     GET_TASK_ID: 'SELECT * FROM scrum_tasks WHERE id = ?',
     UPDATE_TASK: 'UPDATE scrum_tasks SET title = ?, description = ?, status = ?, comments = ?, assigned_user = ? WHERE id = ?',
-    DELETE_TASK: 'DELETE FROM scrum_tasks WHERE id = ?'
+    DELETE_TASK: 'DELETE FROM scrum_tasks WHERE id = ?',
+    GET_ALL_PROJECTS_OWNER_OR_COLLAB: 'SELECT * FROM projects WHERE owner = ? OR collab LIKE "%"?"%"'
 }
 
 module.exports.SQL = SQL;

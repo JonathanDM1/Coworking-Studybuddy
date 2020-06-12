@@ -54,6 +54,10 @@ function deleteTask(data){
     return executeQuery(QUERY.SQL.DELETE_TASK, [data]);
 }
 
+function getAllProjectsUser(data){
+    return executeQuery(QUERY.SQL.GET_ALL_PROJECTS_OWNER_OR_COLLAB, parseData.duplicateData(data));
+}
+
 module.exports.createUser = createUser;
 module.exports.checkUsername = checkUsername;
 module.exports.checkEmail = checkEmail;
@@ -64,3 +68,4 @@ module.exports.createTask = createTask;
 module.exports.getTaskId = getTaskId;
 module.exports.updateTask = updateTask;
 module.exports.deleteTask = deleteTask;
+module.exports.getAllProjectsUser = getAllProjectsUser;

@@ -19,6 +19,16 @@ function parseSql(data){
     return dataArr;
 }
 
+function duplicateData(data){
+    let dataArr = [];
+    for(let i =0; i < 2; i++){
+        dataArr.push(data);
+    }
+    console.log(dataArr);
+    return dataArr;
+}
+
 
 module.exports.parseUserData = parseUserData;
 module.exports.parseSql = parseSql;
+module.exports.duplicateData = duplicateData;

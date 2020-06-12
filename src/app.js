@@ -1,7 +1,7 @@
 require('dotenv').config();
 //DOWNLOADED MODULES
 const express = require('express');
-const session = require('express-session');
+//const session = require('express-session');
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
@@ -57,6 +57,17 @@ app.post('/register', (req, res) => {
     }catch{
         res.json({status: "NOK"});
     }
+});
+
+app.get('/projects', (req, res) => {
+    sqlHandler.getAllProjectsUser("JonathanDM").then((result) => {
+        console.log(result);
+        res.render('project/projects', {
+            projects: result
+        })
+    }).catch((error) => {
+        console.log(error);
+    });
 });
 
 app.get('/projects/:id', (req,res) => {
