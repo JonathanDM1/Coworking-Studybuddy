@@ -63,8 +63,23 @@ function deleteProject(data){
 }
 
 function updateProject(data){
-    console.log(data);
     return executeQuery(QUERY.SQL.UPDATE_PROJECT, parseData.parseSql(data));
+}
+
+function getDeadlinesProject(id){
+    return executeQuery(QUERY.SQL.GET_ALL_DEADLINE_ID, [data]);
+}
+
+function updateDeadline(data){
+    return executeQuery(QUERY.SQL.UPDATE_DEADLINE, parseData.parseSql(data));
+}
+
+function deleteDeadline(data){
+    return executeQuery(QUERY.SQL.DELETE_DEADLINE, [data]);
+}
+
+function createDeadline(data){
+    return executeQuery(QUERY.SQL.CREATE_DEADLINE, parseData.parseSql(data));
 }
 
 module.exports.createUser = createUser;
@@ -80,3 +95,7 @@ module.exports.deleteTask = deleteTask;
 module.exports.getAllProjectsUser = getAllProjectsUser;
 module.exports.deleteProject = deleteProject;
 module.exports.updateProject = updateProject;
+module.exports.createDeadline = createDeadline;
+module.exports.updateDeadline = updateDeadline;
+module.exports.deleteDeadline = deleteDeadline;
+module.exports.getDeadlinesProject = getDeadlinesProject;

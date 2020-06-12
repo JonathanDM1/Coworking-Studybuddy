@@ -13,7 +13,11 @@ const SQL = {
     DELETE_TASK: 'DELETE FROM scrum_tasks WHERE id = ?',
     GET_ALL_PROJECTS_OWNER_OR_COLLAB: 'SELECT * FROM projects WHERE owner = ? OR collab LIKE "%"?"%"',
     DELETE_PROJECT: 'DELETE FROM projects WHERE id = ?',
-    UPDATE_PROJECT: 'UPDATE projects SET project_name = ?, description = ?, collab = ? WHERE id = ?'
+    UPDATE_PROJECT: 'UPDATE projects SET project_name = ?, description = ?, collab = ? WHERE id = ?',
+    GET_ALL_DEADLINE_ID: 'SELECT * FROM calender WHERE project_id = ?',
+    UPDATE_DEADLINE: 'UPDATE calender SET deadline = ?, title = ?, description = ?, importance = ? WHERE id = ?',
+    DELETE_DEADLINE: 'DELETE FROM calender WHERE id = ?',
+    CREATE_DEADLINE: 'INSERT INTO calender(project_id, deadline, title, description, importance) values(?,?,?,?,?)'
 }
 
 module.exports.SQL = SQL;

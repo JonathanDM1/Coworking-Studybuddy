@@ -12,6 +12,7 @@ const server = require('./config/serverConfig');
 const users = require('./modules/users/loginregister');
 const projects = require('./modules/projects/projectActions');
 const tasks = require('./modules/projects/taskActions');
+const calender = require('./modules/projects/calenderActions');
 const sqlHandler = require('./modules/data/sqlHandler');
 
 
@@ -172,10 +173,44 @@ app.delete('/task/:id', (req, res) => {
 app.get('/chat/:id', (req, res) => {
     res.render('project/chat', {
         project_id: req.params.id,
+        //kunnen aan de hand van de database, appart worden toegekend
         server_id: "721015263033819176",
         chat_id: "721015263033819181"
     });
-})
+});
+
+/////////////=================== CALENDER ============================
+app.get('/calender/:id', (req, res) => {
+    res.render('project/calender', {
+        //hier komen later de resutlaten van de kalender ID is hier projectID
+    });
+
+});
+
+app.post('/calender', (req, res) => {
+    try{
+        console.log(req.body);
+        calender.tryCreateDeadline(req.body);
+    } catch {
+        console.log("De deadline kon niet aangemaakt worden.");
+    }
+});
+
+app.put('/calender/:id', (req, res) => {
+    try{
+        calender.tryUpdateDeadline(req.body);
+    } catch {
+        console.log("De deadline kon niet worden aangepast");
+    }   
+});
+
+app.delete('/calender/:id', (req, res) => {
+    try{
+        calender.tryDeleteDeadline(req.params.id);
+    } catch {
+        console.log("De deadline kon niet verwijderd worden");
+    }
+});
 
 /////////////=================== NOT FOUND ============================
 app.get('*', (req,res) => {
