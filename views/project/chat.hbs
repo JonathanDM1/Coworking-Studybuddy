@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <title>PLAN-IT</title>
+  <meta name="description" content="PLAN-IT">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  {{> header }}
+    <section class="content">
+        <h2>Stuur een bericht naar uw teamleden</h2>
+        <p>{{ project_id }}</p>
+        <widgetbot
+            server="{{ server_id }}"
+            channel="{{ chat_id }}"
+            width="800"
+            height="600"
+            shard="https://e.widgetbot.io"
+></widgetbot>
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+    </section>
+  {{> footer }}
+  <script defer src="js/chat.js"></script>
+</body>
+</html>

@@ -166,6 +166,15 @@ app.delete('/task/:id', (req, res) => {
     } catch {
         console.log("De taak kan niet verwijderd worden.");
     }
+});
+
+/////////////=================== CHAT ============================
+app.get('/chat/:id', (req, res) => {
+    res.render('project/chat', {
+        project_id: req.params.id,
+        server_id: "721015263033819176",
+        chat_id: "721015263033819181"
+    });
 })
 
 /////////////=================== NOT FOUND ============================
