@@ -8,29 +8,153 @@
 </head>
 <body>
   {{> header }}
-    <section id="content">
-      {{#each projects}}
-      <div class="project">
-        <h2>{{project_name}}</h2>
-        <p>{{description}}</p>
-        <button onclick="edit({{id}})">Bewerk</button>
-        <button onclick="deleteProject({{id}})">Verwijder</button>
-        <button onclick="showdetails({{id}})">Details</button>
-      </div>
-      {{/each}}
-      <div id="addProject">
-        <a href="http://localhost:3000/newproject">+ Maak een nieuw project</a>
-      </div>
-      <div id="editProject">
-        <form id="edit_project" method="POST">
-          <input type="text" id="edit_title" placeholder="titel">
-          <textarea id="edit_description" placeholder="beschrijving"></textarea>
-          <input type="text" id="edit_collab" placeholder="collabs">
-          <input type="submit" id="submit_edit">
+    <div class="content">
+        <section id="all-projects-overview">
+          {{#each projects}}
+          <div class="project" onclick="showdetails({{id}})">
+              <h2>{{project_name}}</h2>
+              <p>{{description}}</p>
+              <button onclick="showdetails({{id}})">Details</button>
+          </div>
+          {{/each}}
+          <div class="project add-project">
+              <button id="add-new-project">+ Maak een nieuw project</button>
+          </div>
+        </section>
+
+        <section id="create-new-project">
+          <h2>Maak een nieuw project aan</h2>
+          <form method="POST" id="createNewProject">
+            <input type="text" id="new_project_name" placeholder="projectnaam" >
+            <input type="text" id="new_project_owner" placeholder="username eigenaar">
+            <textarea id="new_project_description" placeholder="beschrijving"></textarea>
+            <input type="text" id="new_project_collab" placeholder="email1;email2;email3">
+            <input type="submit" id="new_project_create" value="Maak project aan">
+          </form>
+          <p id="new-project-success" class="success-message">Het aanmaken van een nieuw project was succesvol.</p>
+          <p id="new-project-error" class="error-message">Nieuw project aanmaken is niet gelukt.</p>
+        </section>
+
+        <section id="project-details">
+            <button id="details-back" onclick="showHome('all-projects-overview', 'project-details')">Keer terug naar overzicht</button>
+            <h2>Details van het project</h2>
+            <div id="detail-view-project">
+                <h2 id="detail-title"></h2>
+                <p id="detail-description"></p>
+                <ul id="detail-collab">
+
+                </ul>
+            </div>
+        <div id="project-detais-actions">
+          <button class="action" id="showChat">Chat</button>
+          <button class="action" id="showScrum">Scrum</button>
+          <button class="action" id="showCalander">Kalender</button>
+          <button class="action" id="showSettings">Instellingen</button>
+        </div>
+      </section>
+
+      <section id="project-chat">
+          <button id="chat-back" onclick="showHome('project-details', 'project-chat')">Keer terug naar </button>
+          <h2>Stuur een bericht naar uw teamleden</h2>
+          <widgetbot
+            server="721015263033819176"
+            channel="721021156731387973"
+            width="800"
+            height="600"
+            shard="https://cl2.widgetbot.io"
+        </widgetbot> 
+      </section>
+
+      <section id="project-scrum">
+          <button id="scrum-back" onclick="showHome('project-details', 'project-scrum')">Keer terug naar overzicht</button>
+          <h2>Maak een nieuwe taak</h2>
+          <button class="addButton" onclick="showCreateNewTask()">+ Maak een nieuwe taak</button>
+          <div id="new-task">
+            <p id="new-task-success">De taak is succesvol aangemaakt.</p>
+            <p id="new-task-error">De taak kon niet worden aangemaakt.</p>
+            <form id="addTask" method="POST">
+              <input type="text"  id="task_title" placeholder="titel">
+              <textarea id="task_description" placeholder="beschrijving"></textarea>
+              <select id="task_status">
+                <option>Selecteer een optie</option>
+                <option value="todo">To Do</option>
+                <option value="doing">Doing</option>
+                <option value="review">Review</option>
+                <option value="done">Done</option>
+              </select>
+              <textarea id="comment" placeholder="opmerkingen"></textarea>
+              <input type="text" id="assigned_user" placeholder="toewijzen aan gebruiker">
+              <input type="submit" id="submit_task" value="Voeg taak toe">
+            </form>
+          </div>
+          
+          <div id="project-scrum-board">
+        <!-- Al de taken worden door JS ingeladen -->
+        <div class="scrum-container">
+          <h3>TO DO</h3>
+          <div id="todo">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>DOING</h3>
+          <div id="doing">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>REVIEW</h3>
+          <div id="review">
+
+          </div>
+        </div>
+        <div class="scrum-container">
+          <h3>DONE</h3>
+          <div id="done">
+
+          </div>
+        </div>
+          </div>
+          <div id="edit-task">
+        <form id="editTask" method="POST">
+        <input type="text" id="edit_title" placeholder="title">
+        <textarea id="edit_description" placeholder="beschrijving"></textarea>
+        <select id="edit_status">
+                <option>Selecteer een optie</option>
+                <option value="todo">To Do</option>
+                <option value="doing">Doing</option>
+                <option value="review">Review</option>
+                <option value="done">Done</option>
+        </select>
+        <textarea id="edit_comments" placeholder="Opmerkingen"></textarea>
+        <input type="text" id="edit_assigned_user" placeholder="toewijzen aan gebruiker">
+        <input type="submit" id="edit_submit" value="Sla Op">
         </form>
+          </div>
+      </section>
+
+      <section id="project-settings">
+          <button id="settings-back" onclick="showHome('project-details', 'project-settings')">Keer terug naar overzicht</button>
+          <div id="editSettings">
+            <form id="edit_settings" method="POST">
+              <input type="text" id="edit_project_name" placeholder="Projectnaam">
+              <textarea id="edit_project_description" placeholder="beschrijving"></textarea>
+              <input type="text" id="edit_project_collab" placeholder="collabs">
+              <input type="submit" id="submit_project_edit">
+            </form>
       </div>
-    </section>
+        <!-- ID UIT LS HALEN -->
+
+          <button id="deleteProject" onclick="deleteProject()">Delete project</button>
+      </section>
+
+      <section id="project-calander">
+          <button id="calander-back" onclick="showHome('project-details', 'project-calander')">Keer terug naar overzicht</button>
+          <h3>Kalender</h3>
+      </section>
+    </div>
   {{> footer }}
-  <script src="js/detail.js"></script>
+  <script src="js/showhide.js"></script>
+  <script src="js/actions.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+/*HIDE ALL FORMS AND EXTRAS*/
+#create-new-project, #project-details, #project-chat, #project-scrum, #project-settings, #project-calander{
+    display: none;
+}
+
+#new-project-success, #new-project-error{
+    display: none;
+}
+
+#new-task, #edit-task{
+    display: none;
+}

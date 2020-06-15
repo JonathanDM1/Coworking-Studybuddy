@@ -45,6 +45,7 @@ function tryUpdateProject(data){
     updateProject(data).then(function(result){
         return true;
     }).catch(function(error){
+        console.log(error);
         return false;
     })
 }
@@ -52,6 +53,7 @@ function tryUpdateProject(data){
 function updateProject(data){
     return new Promise(function(resolve, reject){
         sqlHandler.updateProject(data).then((result) => {
+            console.log(result);
             resolve("Het project is bijgewerkt");
         }).catch((error) => {
             console.log(error);

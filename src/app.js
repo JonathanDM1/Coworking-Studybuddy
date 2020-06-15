@@ -71,7 +71,6 @@ app.post('/register', (req, res) => {
 /////////////=================== PROJECTS ============================
 app.get('/projects', (req, res) => {
     sqlHandler.getAllProjectsUser("JonathanDM").then((result) => {
-        console.log(result);
         res.render('project/projects', {
             projects: result
         })
@@ -92,14 +91,14 @@ app.get('/projects/:id', (req,res) => {
 app.put('/projects/:id', (req, res) => {
     try{   
         projects.tryUpdateProject(req.body);
-        res.redirect('/projects');
     } catch{
         console.log("Het project kon niet worden bijgewerkt");
     }
 });
 
-app.get('/projects/:id/scrum', (req, res) => {
+app.get('/scrum/:id', (req, res) => {
     sqlHandler.getAllTasks(req.params.id).then((result) => {
+        res.json(result);
     }).catch((error) => {
         console.log(error);
     });
@@ -119,11 +118,9 @@ app.get('/newproject', (req, res) => {
 });
 
 app.post('/newproject', (req,res) => {
-    console.log(req.body);
     try{
         projects.tryCreateProject(req.body);
-        res.redirect('/projects');
-        console.log("Er is een nieuw project aangemaakt");
+        res.json({status: "OK"});
     } catch {
         console.log("Kan niet maken");
         res.json({status: "NOK"});
@@ -135,7 +132,6 @@ app.get('/newtask', (req,res) => {
 });
 
 app.post('/newTask', async (req, res) => {
-    let test = 1;
     try{
         tasks.tryCreateTask(req.body);
         res.redirect('/projects/' + req.body.project_id + '/scrum')
@@ -167,16 +163,6 @@ app.delete('/task/:id', (req, res) => {
     } catch {
         console.log("De taak kan niet verwijderd worden.");
     }
-});
-
-/////////////=================== CHAT ============================
-app.get('/chat/:id', (req, res) => {
-    res.render('project/chat', {
-        project_id: req.params.id,
-        //kunnen aan de hand van de database, appart worden toegekend
-        server_id: "721015263033819176",
-        chat_id: "721015263033819181"
-    });
 });
 
 /////////////=================== CALENDER ============================
