@@ -44,9 +44,6 @@ app.get('/home', (req, res) => {
     res.render('index');
 });
 
-app.get('/about', (req, res) => {
-    res.render('about_us');
-});
 
 app.get('/contact', (req, res) => {
     res.render('contact');

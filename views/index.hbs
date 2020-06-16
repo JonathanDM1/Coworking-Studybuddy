@@ -1,49 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
     <head>
         <title>Home</title>
         <meta charset="utf-8" />
-        <style>
-            .structural {
-                position: absolute;
-                left: -9999px;
-            }
-        </style>
+        
     </head>
     <body>
-        <header>
-            <h1>logo</h1>
-            <nav>
-                <h2 class="structural">Hoofdnavigatie</h2>
-                <ul>
-                    <li><a href="" title="Home">Home</a></li>
-                    <li><a href="" title="About us">About us</a></li>
-                    <li><a href="" title="Contact">Contact</a></li>
-                    <li><a href="" title="Login/Register">Login/Register</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div>
-                <p id="foto1">foto 1</p>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                </p>
-            </div>
-            
-            <div>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                </p>
-                <p id="foto2">foto 2</p>
-            </div>
+        {{> header }}
+        <main class="content">
+            <section id="banner">
+                <h1>PLAN-IT</h1>
+                <p>Groepswerken gemakkelijk organizeren.</p>
+            </section>
+
+            <section class="content-block">
+                <h2>Wat doen we?</h2>
+                <p>Wij maken het voor studenten in het hoger onderwijs gemakkelijker om hun groepsprojecten bij te houden op één plaats. Want we kennen het allemaal dat het ene groepswerk een chat heeft op discord en de andere op messenger. Wij willen deze functionaliteit samen met een kalender. Scrum board en nog veel meer aanbieden.</p>
+            </section>
+
+            <section class="content-block">
+                <h2>Wij zijn we?</h2>
+                <p>Wij zijn een groep studenten, die zich vaak frustreerden aan het feit dat we soms de organisatie van onze groepswerken verloren waren. Daarom hebben wij dit platform ontwikkeld.</p>
+            </section>
         </main>
-        <footer>
-            <p>©Jonathan, Louis, Moïse</p>
-            <p>logo facebook</p>
-            <p>logo twitter</p>
-        </footer>
+        {{> footer }}
     </body>
 </html>
