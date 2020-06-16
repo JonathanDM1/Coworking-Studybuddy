@@ -3,29 +3,12 @@
     <head>
         <title>Home</title>
         <meta charset="utf-8" />
-        <style>
-            .structural {
-                position: absolute;
-                left: -9999px;
-            }
-        </style>
     </head>
     <body>
-        <header>
-            <h1>logo</h1>
-            <nav>
-                <h2 class="structural">Hoofdnavigatie</h2>
-                <ul>
-                    <li><a href="" title="Home">Home</a></li>
-                    <li><a href="" title="About us">About us</a></li>
-                    <li><a href="" title="Contact">Contact</a></li>
-                    <li><a href="" title="Login/Register">Login/Register</a></li>
-                </ul>
-            </nav>
-        </header>
+        {{> header }}
         <main>
             <h1>Contact</h1>
-            <form>
+            <form method="POST" id="contactForm">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name"><br>
                 <label for="surname">Surname</label>
@@ -34,13 +17,12 @@
                 <input type="email" id="E-mail" name="E-mail">
                 <label for="question">Your question/remark</label>
                 <textarea name="question" rows="10" cols="60"></textarea>
-                <input type="submit">
+                <input type="submit" value="Verzend uw bericht">
             </form>
+            <p id="contact-success">Het bericht is succescvol verstuurd, U ontvangt dadelijk nog een bevestigingsmail.</p>
+            <p id="contact-error">Het bericht kon niet verstuurd worden. Gelieve later opnieuw te proberen.</p>
         </main>
-        <footer>
-            <p>©Jonathan, Louis, Moïse</p>
-            <p>logo facebook</p>
-            <p>logo twitter</p>
-        </footer>
+        {{> footer }}
+        <script src="js/contact.js"></script>
     </body>
 </html>
