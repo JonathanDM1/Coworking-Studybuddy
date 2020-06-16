@@ -18,3 +18,61 @@
 #newDeadline, #updateDeadline{
     display: none;
 }
+/*--------------------------------------------------HELE SITE-----------------------------------------------------------*/
+body{
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+}
+.content{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*------------------------------------------------- PROJECTS-----------------------------------------------------------*/
+#all-projects-overview{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.project{
+    width: 21%;
+    height: 15rem;
+    margin-top: 1rem;
+    background-color: aquamarine;
+    border: 1px solid #484848;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+    align-self: flex-start;
+}
+
+.project:hover{
+    background-color: azure;
+}
+
+.action{
+    width: 7rem;
+    height: 7rem;
+    background-color: aquamarine;
+    border: 1px solid #484848;
+    border-radius: 4px;
+}
+
+.action:hover{
+    background-color: azure;
+}
+
+.goback{
+    height: 2rem;
+    background-color: aquamarine;
+    border: 1px solid #484848;
+    border-radius: 4px;
+}
+
+.goback:hover{
+    background-color: azure;
+}

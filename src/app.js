@@ -75,6 +75,7 @@ app.post('/register', (req, res) => {
 });
 /////////////=================== PROJECTS ============================
 app.get('/projects', (req, res) => {
+    //username moet veranderd worden in de user bij login
     sqlHandler.getAllProjectsUser("JonathanDM").then((result) => {
         res.render('project/projects', {
             projects: result

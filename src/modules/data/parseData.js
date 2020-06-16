@@ -24,7 +24,6 @@ function duplicateData(data){
     for(let i =0; i < 2; i++){
         dataArr.push(data);
     }
-    console.log(dataArr);
     return dataArr;
 }
 
