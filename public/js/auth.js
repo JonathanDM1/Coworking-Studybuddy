@@ -10,7 +10,7 @@ function checkAuth(){
     if(localStorage.getItem('token') != null) {
         console.log("logged in");
     } else {
-        window.location.replace('http://localhost:3000/loginregister');
+        window.location.replace('/loginregister');
     }
 }
 

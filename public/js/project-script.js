@@ -141,7 +141,7 @@ function showdetails(project_id){
 }
 
 function getFromAPI(route, action){
-    fetch('http://localhost:3000' + route)
+    fetch(route)
     .then(response => response.json())
     .then(response => decideProcessor(response, action));
 }
@@ -261,7 +261,7 @@ function deleteTask(id){
 }
 
 function deleteFromAPI(route){
-    fetch('http://localhost:3000' + route, {
+    fetch(route, {
         method: 'DELETE',
     })
     .then(result => result.json())
@@ -298,7 +298,7 @@ function checkEditForm(){
 }
 
 function sendToAPI(route, data, action){
-    fetch('http://localhost:3000' + route, {
+    fetch(route, {
         method: action,
         headers: {
             'Content-Type': 'application/json'
@@ -425,8 +425,10 @@ function checkFormValid(formId){
     let empty = 0;
     let doc = document.getElementById(formId).elements;
     for(let i = 0; i < doc.length; i++){
-        if(doc[i].value == ""){
-            empty += 1;
+        if(doc[i].type != "submit"){
+            if(doc[i].value == ""){
+                empty += 1;
+            }
         }
     }
     return checkEmpty(empty);
@@ -468,7 +470,7 @@ function genCollab(data){
 }
 
 function sendFormToAPI(route, data, action){
-    fetch('http://localhost:3000' + route, {
+    fetch(route, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

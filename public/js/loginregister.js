@@ -94,7 +94,7 @@ function checkEmail(email){
 }
 //Proberen in apparte file te steken met een collectie aan fetch functies. Zo zijn ze makkelijk herbruikbaar         
 function sendFormToAPI(route, data){
-    fetch('http://localhost:3000' + route, {
+    fetch(route, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ function checkResponse(response){
 //DIT IS NIET SECURE!!!!!
 function saveTokenToLS(token){
     localStorage.setItem("token", token);
-    window.location.replace('http://localhost:3000/projects');
+    window.location.replace('/projects');
 }
 
 function getToken(){
