@@ -5,17 +5,44 @@
         document.getElementById('loginForm').addEventListener('submit', function(e){
             e.preventDefault();
 			e.stopPropagation();
-            checkLoginForm();
+            if(checkFormValid('loginForm')){
+                checkLoginForm();
+            } else {
+                alert('Niet alle velden zijn ingevuld');
+            }
         });
         
         document.getElementById('registerForm').setAttribute('novalidate', 'novalidate');
 		document.getElementById('registerForm').addEventListener('submit', function(e){
             e.preventDefault();
 			e.stopPropagation();
-            checkRegisterForm();
+            if(checkFormValid('registerForm')){
+                checkRegisterForm();
+            } else {
+                alert('Niet alle velden zijn ingevuld');
+            }
         });
 	})
 })();	
+
+function checkFormValid(formId){
+    let empty = 0;
+    let doc = document.getElementById(formId).elements;
+    for(let i = 0; i < doc.length; i++){
+        if(doc[i].value == ""){
+            empty += 1;
+        }
+    }
+    return checkEmpty(empty);
+}
+
+function checkEmpty(amount){
+    if(amount > 0){
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function checkLoginForm(){
     let data = getLoginFormData();
@@ -96,6 +123,7 @@ function checkResponse(response){
 //DIT IS NIET SECURE!!!!!
 function saveTokenToLS(token){
     localStorage.setItem("token", token);
+    window.location.replace('http://localhost:3000/projects');
 }
 
 function getToken(){

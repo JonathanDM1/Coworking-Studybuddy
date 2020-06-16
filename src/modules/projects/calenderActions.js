@@ -25,6 +25,7 @@ function tryUpdateDeadline(data){
     updateDeadline(data).then(function(result){
         return true;
     }).catch(function(error){
+        console.log(error);
         return false;
     })
 }

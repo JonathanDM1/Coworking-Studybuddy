@@ -8,7 +8,6 @@
 function checkAuth(){
     console.log(localStorage.getItem('token'));
     if(localStorage.getItem('token') != null) {
-
         console.log("logged in");
     } else {
         window.location.replace('http://localhost:3000/loginregister');

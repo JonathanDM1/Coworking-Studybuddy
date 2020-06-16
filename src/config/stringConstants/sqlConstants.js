@@ -17,7 +17,8 @@ const SQL = {
     GET_ALL_DEADLINE_ID: 'SELECT * FROM calender WHERE project_id = ?',
     UPDATE_DEADLINE: 'UPDATE calender SET deadline = ?, title = ?, description = ?, importance = ? WHERE id = ?',
     DELETE_DEADLINE: 'DELETE FROM calender WHERE id = ?',
-    CREATE_DEADLINE: 'INSERT INTO calender(project_id, deadline, title, description, importance) values(?,?,?,?,?)'
+    CREATE_DEADLINE: 'INSERT INTO calender(project_id, deadline, title, description, importance) values(?,?,?,?,?)',
+    GET_DEADLINE_ID: 'SELECT * FROM calender WHERE id = ?'
 }
 
 module.exports.SQL = SQL;

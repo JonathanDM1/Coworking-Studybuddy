@@ -56,13 +56,9 @@
       <section id="project-chat">
           <button id="chat-back" onclick="showHome('project-details', 'project-chat')">Keer terug naar </button>
           <h2>Stuur een bericht naar uw teamleden</h2>
-          <widgetbot
-            server="721015263033819176"
-            channel="721021156731387973"
-            width="800"
-            height="600"
-            shard="https://cl2.widgetbot.io"
-        </widgetbot> 
+          <div id="chat">
+            <widgetbot server="721015263033819176" channel="721021156731387973" width="800" height="600" shard="https://e.widgetbot.io" ></widgetbot>
+          </div> 
       </section>
 
       <section id="project-scrum">
@@ -151,10 +147,49 @@
       <section id="project-calander">
           <button id="calander-back" onclick="showHome('project-details', 'project-calander')">Keer terug naar overzicht</button>
           <h3>Kalender</h3>
+          <div id="newDeadline">
+            <p id="new-deadline-success">Kalenderitem is succesvol aangemaakt.</p>
+            <p id="new-deadline-error">Kalenderitem kon niet worden aangemaakt.</p>
+            <form method="POST" id="createNewDeadline">
+              <input type="text" id="deadline_title" placeholder="titel">
+              <input type="date" id="deadline_date">
+              <textarea id="deadline_description" placeholder="Beschrijving"></textarea>
+              <select id="deadline_importance">
+                <option value="low">Laag</option>
+                <option value="medium">Middelmatig</option>
+                <option value="high">Hoog</option>
+                <option value="zhoog">Zeer hoog</option>
+              </select>
+              <input type="submit" id="calander-new-deadline" value="Maak nieuwe deadline">
+            </form>
+          </div>
+          <div id="calanderContainer">
+              
+              <div id="deadlineContainer">
+                <!-- Gegevens komen uit de JS -->
+              </div>
+          </div>
+          <div id="updateDeadline">
+            <p id="update-deadline-success">De deadline kon succesvol geupdated worden.</p>
+            <p id="update-deadline-error">De deadline kon niet worden bijgewerkt</p>
+            <form method="POST" id="updateDeadlineForm">
+              <input type="text" id="edit_deadline_title" placeholder="titel">
+              <input type="date" id="edit_deadline_date">
+              <textarea id="edit_deadline_description" placeholder="Beschrijving"></textarea>
+              <select id="edit_deadline_importance">
+                <option value="low">Laag</option>
+                <option value="medium">Middelmatig</option>
+                <option value="high">Hoog</option>
+                <option value="vhigh">Zeer hoog</option>
+              </select>
+              <input type="submit" id="edit_calander-deadline" value="Maak nieuwe deadline">
+            </form>
+          </div>
       </section>
     </div>
   {{> footer }}
-  <script src="js/showhide.js"></script>
-  <script src="js/actions.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/project-script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 </body>
 </html>

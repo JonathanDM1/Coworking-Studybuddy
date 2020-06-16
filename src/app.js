@@ -36,6 +36,14 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/index', (req, res) => {
+    res.render('index');
+});
+
+app.get('/home', (req, res) => {
+    res.render('index');
+});
+
 app.get('/about', (req, res) => {
     res.render('about_us');
 });
@@ -91,7 +99,9 @@ app.get('/projects/:id', (req,res) => {
 app.put('/projects/:id', (req, res) => {
     try{   
         projects.tryUpdateProject(req.body);
+        res.json({status: "OK"});
     } catch{
+        res.json({status: "NOK"});
         console.log("Het project kon niet worden bijgewerkt");
     }
 });
@@ -107,9 +117,10 @@ app.get('/scrum/:id', (req, res) => {
 app.delete('/projects/:id', (req, res) => {
     try{
         projects.tryDeleteProject(req.params.id);
-        res.redirect('/projects');
+        res.json({status: "OK"});
     } catch {
         console.log("De taak kan niet worden verwijderd");
+        res.json({status: "NOK"});
     }
 });
 
@@ -127,16 +138,13 @@ app.post('/newproject', (req,res) => {
     }
 });
 /////////////=================== TASKS ============================
-app.get('/newtask', (req,res) => {
-    res.render('project/scrum');
-});
-
 app.post('/newTask', async (req, res) => {
     try{
         tasks.tryCreateTask(req.body);
-        res.redirect('/projects/' + req.body.project_id + '/scrum')
+        res.json({status: "OK"});
     } catch{
         console.log("Taak kan niet gemaakt worden");
+        res.json({status: "NOK"});
     }
 });
 
@@ -152,49 +160,68 @@ app.get('/task/:id', (req, res) => {
 app.put('/task/:id', (req, res) => {
     try{
         tasks.tryUpdateTask(req.body);
+        res.json({status: "OK"});
     } catch {
         console.log("De taak kan niet bijgewerkt worden");
+        res.json({status: "NOK"});
     }
 });
 
 app.delete('/task/:id', (req, res) => {
     try{
         tasks.tryDeleteTask(req.params.id);
+        res.json({status: "OK"});
     } catch {
         console.log("De taak kan niet verwijderd worden.");
+        res.json({status: "NOK"});
     }
 });
 
 /////////////=================== CALENDER ============================
 app.get('/calender/:id', (req, res) => {
-    res.render('project/calender', {
-        //hier komen later de resutlaten van de kalender ID is hier projectID
-    });
+    sqlHandler.getDeadlinesProject(req.params.id).then((result) => {
+        res.json({result: result});
+    }).catch((error) => {   
+        console.log(error);
+        console.log("Er kon geen kalender gevonden worden.");
+    })
+})
 
+app.get('/calender/deadline/:id', (req, res) => {
+    sqlHandler.getDeadline(req.params.id).then((result) => {
+        res.json({result: result});
+    }).catch((error) => {
+        console.log("Er kon geen informatie van deze kalender opgehaald worden");
+    })
 });
 
 app.post('/calender', (req, res) => {
     try{
-        console.log(req.body);
         calender.tryCreateDeadline(req.body);
+        res.json({status: "OK"});
     } catch {
         console.log("De deadline kon niet aangemaakt worden.");
+        res.json({status: "NOK"});
     }
 });
 
 app.put('/calender/:id', (req, res) => {
     try{
         calender.tryUpdateDeadline(req.body);
+        res.json({status: "OK"});
     } catch {
         console.log("De deadline kon niet worden aangepast");
+        res.json({status: "NOK"});
     }   
 });
 
 app.delete('/calender/:id', (req, res) => {
     try{
         calender.tryDeleteDeadline(req.params.id);
+        res.json({status: "OK"});
     } catch {
         console.log("De deadline kon niet verwijderd worden");
+        res.json({status: "NOK"});
     }
 });
 
