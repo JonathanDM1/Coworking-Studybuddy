@@ -1,7 +1,6 @@
-require('dotenv').config();
 //DOWNLOADED MODULES
+require('dotenv').config();
 const express = require('express');
-//const session = require('express-session');
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
@@ -14,13 +13,14 @@ const projects = require('./modules/projects/projectActions');
 const tasks = require('./modules/projects/taskActions');
 const calender = require('./modules/projects/calenderActions');
 const sqlHandler = require('./modules/data/sqlHandler');
-
+const mailer = require('./modules/mailing/mailHandler');
 
 //DIRECTORIES
 const publicDirectory = path.join(__dirname, '../public');
 const viewsDirectory = path.join(__dirname, '../views');
 const partialsDirectory = path.join(__dirname, '../views/partials');
 
+//SETTINGS
 hbs.registerPartials(partialsDirectory);
 app.use(express.json());
 app.use(express.static(publicDirectory));
@@ -45,19 +45,20 @@ app.get('/home', (req, res) => {
 });
 
 
+
+/////////////=================== CONTACT ===================================
 app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
 app.post('/contact', (req, res) => {
-    console.log(req.body);
-    //Later een mail versturen naar gegeven email
     try{
-
+        console.log(req.body);
+        mailer.contactMail(req.body);
     } catch{
-        
+        console.log("De mail kon niet verzonden worden.");
     }
-})
+});
 /////////////=================== LOGIN/REGISTER ============================
 app.get('/loginregister', (req, res) => {
     res.render('user/loginregister');
@@ -78,6 +79,7 @@ app.post('/login', (req,res) => {
 app.post('/register', (req, res) => {
     try{
         users.tryRegister(req.body);
+        mailer.registerMail(req.body.email);
         res.json({status: "OK"});
     }catch{
         res.json({status: "NOK"});

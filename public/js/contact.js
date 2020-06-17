@@ -54,6 +54,7 @@ function getContactFormData(){
         name: document.getElementById('name').value,
         surname: document.getElementById('surname').value,
         email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
         question: document.getElementById('question').value
     }
     sendFormToAPI('http://localhost:3000/contact', data);
