@@ -92,7 +92,7 @@ function checkEmail(email){
         return false;
     }
 }
-//Proberen in apparte file te steken met een collectie aan fetch functies. Zo zijn ze makkelijk herbruikbaar         
+   
 function sendFormToAPI(route, data){
     fetch(route, {
         method: 'POST',

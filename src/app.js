@@ -47,6 +47,16 @@ app.get('/home', (req, res) => {
 
 app.get('/contact', (req, res) => {
     res.render('contact');
+});
+
+app.post('/contact', (req, res) => {
+    console.log(req.body);
+    //Later een mail versturen naar gegeven email
+    try{
+
+    } catch{
+        
+    }
 })
 /////////////=================== LOGIN/REGISTER ============================
 app.get('/loginregister', (req, res) => {

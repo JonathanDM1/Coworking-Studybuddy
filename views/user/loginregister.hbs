@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   <title>PLAN-IT</title>
   <meta name="description" content="PLAN-IT">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   {{> header }}
     <section class="content">
         <h2>Dit is de loginpagina</h2>
-        <div id="login">
+        <div id="logreg">
+        <div class="form" id="login">
+          <h2>Login</h2>
         <form id="loginForm" method="POST">
             <label for="loginUName">Gebruikersnaam/emailadres</label>
             <input type="text" id="loginUName" placeholder="gebruikersnaam/emailadres">
@@ -19,15 +23,22 @@
             <input type="submit" id="loginSubmit" value="Login">
         </form>
         </div>
-        <div id="register">
+        <div class="form" id="register">
+          <h2>Registreer</h2>
         <form id="registerForm" method="POST">
+            <label for="username">Gebruikersnaam</label>
             <input type="text" id="username" placeholder="gebruikersnaam">
+            <label for="email">E-mailadres</label>
             <input type="email" id="email" placeholder="emailadres">
-            <input type="text" id="school_name" placeholder="school name">
+            <label for="school_name">Schoolnaam</label>
+            <input type="text" id="school_name" placeholder="school naam">
+            <label for="password1">Wachtwoord</label>
             <input type="password" id="password1" placeholder="wachtwoord">
+            <label for="password2">Herhaal wachtwoord</label>
             <input type="password" id="password2" placeholder="herhaal wachtwoord">
             <input type="submit" id="registerSubmit" value="Registreer">
         </form>
+        </div>
         </div>
     </section>
   {{> footer }}

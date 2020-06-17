@@ -4,12 +4,17 @@
   <meta charset="utf-8">
   <title>PLAN-IT</title>
   <meta name="description" content="PLAN-IT">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   {{> header }}
-    <h2>{{ page }}</h2>
-    <p>Niet gevonden</p>
+  <section class="content">
+    <h1 id="status-code">404</h1>
+    <h2 id="not-found-page">{{ page }}</h2>
+    <p id="sub-title">Niet gevonden</p>
+  </section>
   {{> footer }}
 </body>
 </html>

@@ -19,18 +19,21 @@
               <button onclick="showdetails({{id}})">Details</button>
           </div>
           {{/each}}
-          <div class="project add-project">
-              <button id="add-new-project">+ Maak een nieuw project</button>
-          </div>
+          <button class="project" id="add-new-project"><i class="fa fa-plus"></i> Maak een nieuw project</button>
         </section>
 
         <section id="create-new-project">
+          <i id="closeNewProject" class="fa fa-remove close"></i>
           <h2>Maak een nieuw project aan</h2>
           <form method="POST" id="createNewProject">
+            <label for="new_project_name">Projectnaam</label>
             <input type="text" id="new_project_name" placeholder="projectnaam" >
+            <label for="new_project_owner">Eigenaar van het project</label>
             <input type="text" id="new_project_owner" placeholder="username eigenaar">
+            <label for="new_project_description">Beschrijving</label>
             <textarea id="new_project_description" placeholder="beschrijving"></textarea>
-            <input type="text" id="new_project_collab" placeholder="email1;email2;email3">
+            <label for="new_project_collab">Wie helpt mee?</label>
+            <input type="text" id="new_project_collab" placeholder="gebruiker1, gebruiker2, gebruiker3">
             <input type="submit" id="new_project_create" value="Maak project aan">
           </form>
           <p id="new-project-success" class="success-message">Het aanmaken van een nieuw project was succesvol.</p>
@@ -56,21 +59,25 @@
       </section>
 
       <section id="project-chat">
-          <button id="chat-back" onclick="showHome('project-details', 'project-chat')">Keer terug naar </button>
+          <button class="goback" id="chat-back" onclick="showHome('project-details', 'project-chat')">Keer terug naar het project</button>
           <h2>Stuur een bericht naar uw teamleden</h2>
-          <widgetbot server="721015263033819176" channel="721021156731387973" width="800" height="600" shard="https://e.widgetbot.io" ></widgetbot>
+          <widgetbot class="chatScreen" server="721015263033819176" channel="721021156731387973" shard="https://e.widgetbot.io" ></widgetbot>
       </section>
 
       <section id="project-scrum">
-          <button id="scrum-back" onclick="showHome('project-details', 'project-scrum')">Keer terug naar overzicht</button>
-          <h2>Maak een nieuwe taak</h2>
-          <button class="addButton" onclick="showCreateNewTask()">+ Maak een nieuwe taak</button>
+          <button class="goback" onclick="showHome('project-details', 'project-scrum')">Keer terug naar overzicht</button>
+          <button class="addButton" onclick="showCreateNewTask()"><i class="fa fa-plus"></i> Maak een nieuwe taak</button>
           <div id="new-task">
+            <i onclick="closeItem('new-task')" class="fa fa-remove close"></i>
+            <h2>Maak een nieuwe taak</h2>
             <p id="new-task-success">De taak is succesvol aangemaakt.</p>
             <p id="new-task-error">De taak kon niet worden aangemaakt.</p>
             <form id="addTask" method="POST">
+              <label for="task_title">Titel van de taak</label>
               <input type="text"  id="task_title" placeholder="titel">
+              <label for="task_description">Beschrijving</label>
               <textarea id="task_description" placeholder="beschrijving"></textarea>
+              <label for="task_status">Status</label>
               <select id="task_status">
                 <option>Selecteer een optie</option>
                 <option value="todo">To Do</option>
@@ -78,7 +85,9 @@
                 <option value="review">Review</option>
                 <option value="done">Done</option>
               </select>
+              <label for="comment">Opmerkingen</label>
               <textarea id="comment" placeholder="opmerkingen"></textarea>
+              <label for="assigned_user">Taak toewijzen aan: </label>
               <input type="text" id="assigned_user" placeholder="toewijzen aan gebruiker">
               <input type="submit" id="submit_task" value="Voeg taak toe">
             </form>
@@ -112,9 +121,14 @@
         </div>
           </div>
           <div id="edit-task">
+            <i onclick="closeItem('edit-task')" class="fa fa-remove close"></i>
+            <h2>Bewerk een taak</h2>
         <form id="editTask" method="POST">
+        <label for="edit_title">Bewerk titel</label>
         <input type="text" id="edit_title" placeholder="title">
+        <label for="edit_description">Bewerk beschrijving</label>
         <textarea id="edit_description" placeholder="beschrijving"></textarea>
+        <label for="edit_status">Bewerk status</label>
         <select id="edit_status">
                 <option>Selecteer een optie</option>
                 <option value="todo">To Do</option>
@@ -122,7 +136,9 @@
                 <option value="review">Review</option>
                 <option value="done">Done</option>
         </select>
+        <label for="edit_comments">Bewerk opmerkingen</label>
         <textarea id="edit_comments" placeholder="Opmerkingen"></textarea>
+        <label for="edit_assigned_user">Bewerk groepsleden</label>
         <input type="text" id="edit_assigned_user" placeholder="toewijzen aan gebruiker">
         <input type="submit" id="edit_submit" value="Sla Op">
         </form>
@@ -131,30 +147,37 @@
 
       <section id="project-settings">
           <h2>Instellingen</h2>
-          <button id="settings-back" onclick="showHome('project-details', 'project-settings')">Keer terug naar overzicht</button>
+          <button class="goback" id="settings-back" onclick="showHome('project-details', 'project-settings')">Keer terug naar overzicht</button>
           <div id="editSettings">
             <form id="edit_settings" method="POST">
+              <label for="edit_project_name">Bewerk titel</label>
               <input type="text" id="edit_project_name" placeholder="Projectnaam">
+              <label for="edit_project_description"></label>
               <textarea id="edit_project_description" placeholder="beschrijving"></textarea>
+              <label for="edit_project_collab">Bewerk groepsleden</label>
               <input type="text" id="edit_project_collab" placeholder="collabs">
-              <input type="submit" id="submit_project_edit">
+              <input type="submit" id="submit_project_edit" value="Opslaan">
             </form>
+            <button class="delete" id="deleteProject" onclick="deleteProject()">Delete project</button>
       </div>
-        <!-- ID UIT LS HALEN -->
-
-          <button id="deleteProject" onclick="deleteProject()">Delete project</button>
       </section>
 
       <section id="project-calander">
-          <button id="calander-back" onclick="showHome('project-details', 'project-calander')">Keer terug naar overzicht</button>
+          <button class="goback" id="calander-back" onclick="showHome('project-details', 'project-calander')">Keer terug naar overzicht</button>
           <h3>Kalender</h3>
           <div id="newDeadline">
+            <i onclick="closeItem('newDeadline')" class="fa fa-remove close"></i>
+            <h2>Maak een nieuwe deadline</h2>
             <p id="new-deadline-success">Kalenderitem is succesvol aangemaakt.</p>
             <p id="new-deadline-error">Kalenderitem kon niet worden aangemaakt.</p>
             <form method="POST" id="createNewDeadline">
+              <label for="deadline_title">Titel van de deadline</label>
               <input type="text" id="deadline_title" placeholder="titel">
+              <label for="deadline_date">Datum</label>
               <input type="date" id="deadline_date">
+              <label for="deadline_description">Beschrijving</label>
               <textarea id="deadline_description" placeholder="Beschrijving"></textarea>
+              <label for="deadline_importance">Prioriteit</label>
               <select id="deadline_importance">
                 <option value="low">Laag</option>
                 <option value="medium">Middelmatig</option>
@@ -165,18 +188,23 @@
             </form>
           </div>
           <div id="calanderContainer">
-              
               <div id="deadlineContainer">
                 <!-- Gegevens komen uit de JS -->
               </div>
           </div>
           <div id="updateDeadline">
+            <i onclick="closeItem('updateDeadline')" class="fa fa-remove close"></i>
+            <h2>Bewerk de deadline</h2>
             <p id="update-deadline-success">De deadline kon succesvol geupdated worden.</p>
             <p id="update-deadline-error">De deadline kon niet worden bijgewerkt</p>
             <form method="POST" id="updateDeadlineForm">
+              <label for="edit_deadline_title">Bewerk titel</label>
               <input type="text" id="edit_deadline_title" placeholder="titel">
+              <label for="edit_deadline_date">Bewerk deadline</label>
               <input type="date" id="edit_deadline_date">
+              <label for="edit_deadline_description">Bewerk beschrijving</label>
               <textarea id="edit_deadline_description" placeholder="Beschrijving"></textarea>
+              <label for="edit_deadline_importance">Bewerk prioriteit</label>
               <select id="edit_deadline_importance">
                 <option value="low">Laag</option>
                 <option value="medium">Middelmatig</option>

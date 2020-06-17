@@ -6,7 +6,7 @@
         document.getElementById('showScrum').addEventListener('click', showScrum);
         document.getElementById('showCalander').addEventListener('click', showCalander);
         document.getElementById('showSettings').addEventListener('click', showSettings);
-
+        document.getElementById('closeNewProject').addEventListener('click', hideProjAddForm);
         document.getElementById('editTask').setAttribute('novalidate', 'novalidate');
 		document.getElementById('edit_submit').addEventListener('click', function(e){
             e.preventDefault();
@@ -86,6 +86,14 @@ function hideItem(elementid){
 
 function addTextToHTML(elementid, text){
     document.getElementById(elementid).innerHTML = text;
+}
+
+function hideProjAddForm(){
+    hideItem('create-new-project');
+}
+
+function closeItem(id){
+    hideItem(id);
 }
 
 function showHome(show, hide){
@@ -392,12 +400,12 @@ function generateDeadlinesHTML(data){
         for(let i = 0; i < data.result.length; i++){
             html += genDeadline(data.result[i]);
         }
-        doc.innerHTML = html + newDeadlineButton();
+        doc.innerHTML = newDeadlineButton() + html;
     }
 }
 
 function newDeadlineButton(){
-    return "<button class='addbutton' id='addDeadlineButton' onclick='showNewDeadlineForm()'>+ Voeg nieuwe deadline toe</button>";
+    return "<button class='addButton' id='addDeadlineButton' onclick='showNewDeadlineForm()'>+ Voeg nieuwe deadline toe</button>";
 }
 
 function showNoDeadlines(){
@@ -414,8 +422,8 @@ function genDeadline(data){
     html += "<p class='deadline-description'>" + data.description + "</p>";
     html += "<p class='" + data.importance + "'>" + data.importance.toUpperCase() + "</p>";
     html += "<div class='button-group'>";
-    html += "<button class='edit-button' onclick='editDeadline(" + data.id + ")'><i class='fa fa-edit'></i> Bewerk</button>";
-    html += "<button class='delete-button' onclick='deleteDeadline(" + data.id + ")'><i class='fa fa-times'></i> Verwijder</button>";
+    html += "<button class='edit' onclick='editDeadline(" + data.id + ")'><i class='fa fa-edit'></i> Bewerk</button>";
+    html += "<button class='delete' onclick='deleteDeadline(" + data.id + ")'><i class='fa fa-times'></i> Verwijder</button>";
     html += "</div>";
     html += "</div>"
     return html;
