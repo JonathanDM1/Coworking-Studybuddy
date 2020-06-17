@@ -63,6 +63,7 @@ function getContactFormData(){
 function checkResponse(data){
     if(data.status == "OK"){
         document.getElementById('contact-success').style.display = 'block';
+        document.getElementById('contactForm').style.display = "none";
     } else {
         document.getElementById('contact-error').style.display = 'none';
     }

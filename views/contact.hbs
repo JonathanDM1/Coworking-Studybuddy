@@ -12,6 +12,7 @@
         {{> header }}
         <main class="content">
             <h1>Contact</h1>
+            <p id="contact-error">Het bericht kon niet verstuurd worden. Gelieve later opnieuw te proberen.</p>
             <form method="POST" id="contactForm">
                 <label for="name">Uw naam</label>
                 <input type="text" id="name" name="name"><br>
@@ -26,7 +27,7 @@
                 <input type="submit" value="Verzend uw bericht">
             </form>
             <p id="contact-success">Het bericht is succescvol verstuurd, U ontvangt dadelijk nog een bevestigingsmail.</p>
-            <p id="contact-error">Het bericht kon niet verstuurd worden. Gelieve later opnieuw te proberen.</p>
+            
         </main>
         {{> footer }}
         <script src="js/contact.js"></script>

@@ -55,8 +55,10 @@ app.post('/contact', (req, res) => {
     try{
         console.log(req.body);
         mailer.contactMail(req.body);
+        res.json({status: "OK"});
     } catch{
         console.log("De mail kon niet verzonden worden.");
+        res.json({status: "NOK"});
     }
 });
 /////////////=================== LOGIN/REGISTER ============================

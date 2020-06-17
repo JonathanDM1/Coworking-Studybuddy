@@ -29,7 +29,6 @@ function genOverviewOfInput(data){
     overview += "Uw e-mailadres: " + data.email + "\n\n";
     overview += "Het onderwerp: " + data.subject + "\n\n";
     overview += "Uw vraag: " + data.question + "\n\n";
-    console.log(overview);
     return overview;
 }
 

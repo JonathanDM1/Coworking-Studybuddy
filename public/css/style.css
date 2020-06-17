@@ -76,6 +76,7 @@ nav ul li a{
     font-weight: bold;
     color: #484848;
     margin-left: 2rem;
+    text-decoration: none;
 }
 
 footer{
@@ -351,7 +352,7 @@ textarea{
 
 /*------------------------------------------------- CONTACT -----------------------------------------------------------*/
 #contactForm input[type="text"], #contactForm input[type="email"], #contactForm textarea{
-    margin-bottom: 1.05rem;
+    margin-bottom: 0.75rem;
     width: 45rem;
 }
 
@@ -365,8 +366,21 @@ textarea{
     margin-left: 15rem;
 }
 
+#contactForm textarea{
+    height: 4rem;
+}
+
 #contact-success, #contact-error{
     display: none;
+    text-align: center;
+}
+
+#contact-success{
+    padding: 1rem;
+    border: 1px solid #484848;
+    border-radius: 4px;
+    background-color: lightgreen;
+    margin-top: 12.5rem;
 }
 
 /*------------------------------------------------- INDEX -----------------------------------------------------------*/
