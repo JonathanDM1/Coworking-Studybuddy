@@ -238,8 +238,8 @@ function generateTaskHTML(row){
     html += "<p>" + row.description + "</p>";
     html += "<p>" + row.comments + "</p>";
     html += "<p>" + row.status + "</p>";
-    html += "<button class='edit' onclick=edit(" + row.id + ")>Bewerk</button>";
-    html += "<button class='delete' onclick=deleteTask(" + row.id + ")>Verwijder</button>";
+    html += "<button class='edit' onclick=edit(" + row.id + ")><i class='fa fa-edit'></i> Bewerk</button>";
+    html += "<button class='delete' onclick=deleteTask(" + row.id + ")><i class='fa fa-times'></i> Verwijder</button>";
     html += "</div>";
     return html;
 }
@@ -414,8 +414,8 @@ function genDeadline(data){
     html += "<p class='deadline-description'>" + data.description + "</p>";
     html += "<p class='" + data.importance + "'>" + data.importance.toUpperCase() + "</p>";
     html += "<div class='button-group'>";
-    html += "<button class='edit-button' onclick='editDeadline(" + data.id + ")'>Bewerk</button>";
-    html += "<button class='delete-button' onclick='deleteDeadline(" + data.id + ")'>Verwijder</button>";
+    html += "<button class='edit-button' onclick='editDeadline(" + data.id + ")'><i class='fa fa-edit'></i> Bewerk</button>";
+    html += "<button class='delete-button' onclick='deleteDeadline(" + data.id + ")'><i class='fa fa-times'></i> Verwijder</button>";
     html += "</div>";
     html += "</div>"
     return html;
