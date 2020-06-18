@@ -336,6 +336,28 @@ textarea{
     margin-left: 15rem;
 }
 
+.low, .medium, .high, .vhigh{
+    font-weight: bold;
+    width: 3rem;
+    text-align: center;
+}
+
+.low{
+    background-color: lightgreen;
+}
+
+.medium{
+    background-color: yellow;
+}
+
+.high{
+    background-color: orange;
+}
+
+.vhigh{
+    background-color: red;
+}
+
 /*------------------------------------------------- LOGIN REGISTER -----------------------------------------------------------*/
 #logreg{
     display: flex;
