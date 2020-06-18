@@ -57,7 +57,7 @@ function getContactFormData(){
         subject: document.getElementById('subject').value,
         question: document.getElementById('question').value
     }
-    sendFormToAPI('http://localhost:3000/contact', data);
+    sendFormToAPI('/contact', data);
 }
 
 function checkResponse(data){
